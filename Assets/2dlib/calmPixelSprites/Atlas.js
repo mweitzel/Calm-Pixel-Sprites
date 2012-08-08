@@ -1,19 +1,66 @@
 #pragma strict
 
 var nameOfAtlasKey : String;
-var thing : String;
+var block : String;
 var meshFilter : MeshFilter;
+
+	var keys = new Array();//: String[];// = [];
+	var values = new Array();//: Vector4[];
 
 function Start () {
 	meshFilter = GetComponent(MeshFilter);
 	var textdata : TextAsset = Resources.Load(nameOfAtlasKey);
 //	Debug.Log(textdata);
-	thing = textdata.text;
+//	var keys : String[];// = [];
+//	var value : Vector4[];
 	
+	block = textdata.text;
+	var sentence : String[] = ["", "", "", "", "", ""];
+	var name = "";
+	var index = 0;
+	var token = 0;
+	while(index < block.length){
+		var spot = block[index];
+
+		
+		if(spot == ' '){
+			token++;
+		}
+		else if(spot == '\n'){
+			addThing(sentence);
+			token = 0;
+			for(var i = 0; i< sentence.length; i++){
+				sentence[i] = "";
+			}
+		}
+		else{
+			sentence[token] = sentence[token] + spot;
+		}
+		
+		index++;
+	}
+	
+	Debug.Log(keys);
+	Debug.Log(values);
+
+
 //	
 //	meshFilter.mesh = QuadGenerator.CreateQuad();
 //	meshFilter = GetComponent(MeshFilter);
 	
+}
+
+function addThing(sentence : String[]){
+	for(var i = 0; i< sentence.length; i++){
+		Debug.Log(sentence[i]);
+	}
+	keys.Push(sentence[0]);
+	values.Push(Vector4(int.Parse(sentence[2]),
+						int.Parse(sentence[3]),
+						int.Parse(sentence[4]),
+						int.Parse(sentence[5])
+						)
+				);
 }
 
 //function Update () {

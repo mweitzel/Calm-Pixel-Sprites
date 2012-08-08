@@ -3,7 +3,7 @@
 var myAtlas : Atlas;
 var myFilter : MeshFilter;
 var texture : Texture;
-var pixelsWide : int = 10;
+
 function Start () {
 
     renderer.material = new Material (Shader.Find("Diffuse"));
@@ -16,19 +16,23 @@ function Start () {
 	transform.position = 10*Random.insideUnitCircle;
 }
 
-var x1 : int;
-var y1 : int;
-var x2 : int;
-var y2 : int;
+var x_y_width_height : Vector4;
+
 function Update () {
 	if(myFilter.mesh.vertices.length == 0){
 		myFilter.mesh = myAtlas.meshFilter.mesh;
 	}
 
+	x_y_width_height.x = Mathf.RoundToInt(x_y_width_height.x);
+	x_y_width_height.y = Mathf.RoundToInt(x_y_width_height.y);
+	x_y_width_height.z = Mathf.RoundToInt(x_y_width_height.z);
+	x_y_width_height.w = Mathf.RoundToInt(x_y_width_height.w);
+
 
 	var mapWidth = myAtlas.renderer.material.mainTexture.width;
 	var mapHeight = myAtlas.renderer.material.mainTexture.height;
-	var newMesh = QuadGenerator.CreateQuad(x1, y1, x2, y2, mapWidth, mapHeight);
+//	var newMesh = QuadGenerator.CreateQuad(x1, y1, x2, y2, mapWidth, mapHeight);
+	var newMesh = QuadGenerator.CreateQuad(x_y_width_height, mapWidth, mapHeight);
 
 
 	var mesh = myFilter.mesh;
@@ -46,11 +50,37 @@ function Update () {
 
 class QuadGenerator {
 
-    static function CreateQuad(x1 : float, y1 : float, x2 : float, y2 : float, mapWidth : float, mapHeight : float) : Mesh
-    {
+    static function CreateQuad(x_y_width_height : Vector4, mapWidth : float, mapHeight : float) : Mesh
+    {	
+    	
+    	var x1 : float = x_y_width_height.x;
+    	var y1 : float = x_y_width_height.y;
+    	var x2 : float = x_y_width_height.x + x_y_width_height.w;
+    	var y2 : float = x_y_width_height.y + x_y_width_height.z;
+
+//    	if((x1+x2)%2==1)
+//    		x2 += 1;
+//    	if((y1+y2)%2==1)
+//    		y2 += 1;
         var mesh = new Mesh();
 
 		var vertices = getVerts(x2 - x1, y2 - y1);
+    	
+    	var xOffSet = 0.0;
+		var yOffSet = 0.0;
+		if((x1+x2)%2!=0)
+    		xOffSet = 1;
+    	if((y1+y2)%2!=0)
+    		yOffSet = -1;
+    	if(xOffSet != 0 || yOffSet != 0){
+//    		for(var i = 0; i < vertices.length; i++){
+//    			vertices[0].x += xOffSet;
+    			vertices[0].y += yOffSet;
+    			vertices[2].y += yOffSet;
+    			vertices[2].x += xOffSet;
+    			vertices[3].x += xOffSet;
+//    		}
+    	}
 
 		var uv = getUVs(x1, y1, x2, y2, mapWidth, mapHeight);
 
@@ -77,10 +107,10 @@ class QuadGenerator {
     static function getVerts(xWidth : int, yWidth : int){
             var vertices : Vector3[] = new Vector3[4];
 
-            vertices[0] = new Vector3(-xWidth/2, -yWidth/2, 0);
-            vertices[1] = new Vector3(-xWidth/2,  yWidth/2, 0);
-            vertices[2] = new Vector3( xWidth/2, -yWidth/2, 0);
-            vertices[3] = new Vector3( xWidth/2,  yWidth/2, 0);
+            vertices[0] = new Vector3(Mathf.RoundToInt(-xWidth/2), Mathf.RoundToInt(-yWidth/2), 0);
+            vertices[1] = new Vector3(Mathf.RoundToInt(-xWidth/2), Mathf.RoundToInt( yWidth/2), 0);
+            vertices[2] = new Vector3(Mathf.RoundToInt( xWidth/2), Mathf.RoundToInt(-yWidth/2), 0);
+            vertices[3] = new Vector3(Mathf.RoundToInt( xWidth/2), Mathf.RoundToInt( yWidth/2), 0);
 		return vertices;	
     }
     
