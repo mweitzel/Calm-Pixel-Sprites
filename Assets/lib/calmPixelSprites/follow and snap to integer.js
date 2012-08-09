@@ -1,5 +1,6 @@
 #pragma strict
 var target : Transform;
+var followParent = false;
 
 function Update () {
 	if(target == null)
