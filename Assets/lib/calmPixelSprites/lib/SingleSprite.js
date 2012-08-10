@@ -7,18 +7,12 @@ private var currentSprite : String = "";
 function Start () {
 
     renderer.material = new Material (Shader.Find("Diffuse"));
-    renderer.material.mainTexture = myAtlas.renderer.materials[0].mainTexture;//texture;
+    renderer.material.mainTexture = myAtlas.renderer.materials[0].mainTexture;
 
 	GetComponent(MeshRenderer).material = myAtlas.renderer.materials[0];
 
-//    myFilter.mesh.RecalculateNormals();
-
-//	transform.position = 10*Random.insideUnitCircle;
-
 	updateSprite();
 }
-
-//var x_y_width_height : Vector4;
 
 function Update () {
 	if(myFilter.mesh.vertices.length == 0){

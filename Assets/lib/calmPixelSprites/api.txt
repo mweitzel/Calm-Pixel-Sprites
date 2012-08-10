@@ -1,0 +1,20 @@
+
+//it is highly recomended that you use spriteAnimation for individual sprites instead of making a singleSprite
+spriteAnimation()
+	setSprite(animation);
+	setSprite(sprite);
+	forceLoop(boolean);
+	show(true/false);
+	set(string);
+	set(animation);
+	play();//resume
+	pause();//not toggle	
+	play(timeT);
+
+//todo
+//	playAtFrame(number);
+//	playAtFrame(name);
+
+//todo
+//	turn atlas into a map, abstractify.
+//	..maybe do this. but probably maybe not, too

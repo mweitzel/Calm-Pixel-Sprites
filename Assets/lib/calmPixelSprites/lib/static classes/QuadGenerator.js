@@ -11,10 +11,6 @@ class QuadGenerator {
     	var x2 : float = x_y_width_height.x + x_y_width_height.w;
     	var y2 : float = x_y_width_height.y + x_y_width_height.z;
 
-//    	if((x1+x2)%2==1)
-//    		x2 += 1;
-//    	if((y1+y2)%2==1)
-//    		y2 += 1;
         var mesh = new Mesh();
 
 		var vertices = getVerts(x2 - x1, y2 - y1);
@@ -26,13 +22,10 @@ class QuadGenerator {
     	if((y1+y2)%2!=0)
     		yOffSet = -1;
     	if(xOffSet != 0 || yOffSet != 0){
-//    		for(var i = 0; i < vertices.length; i++){
-//    			vertices[0].x += xOffSet;
     			vertices[0].y += yOffSet;
     			vertices[2].y += yOffSet;
     			vertices[2].x += xOffSet;
     			vertices[3].x += xOffSet;
-//    		}
     	}
 
 		var uv = getUVs(x1, y1, x2, y2, mapWidth, mapHeight);
