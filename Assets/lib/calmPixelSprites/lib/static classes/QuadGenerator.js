@@ -62,7 +62,12 @@ class QuadGenerator {
     
     static function getUVs(x1 : float, y1 : float, x2 : float, y2 : float, mapWidth : float, mapHeight : float){
 
-		
+			//adjust slightly in to remove false clamping
+			x1 = x1 + 0.001;
+			x2 = x2 - 0.001;
+			y1 = y1 + 0.001;
+			y2 = y2 - 0.001;
+
             var uv : Vector2[] = new Vector2[4];
 
             uv[0] = (new Vector2(x1/mapWidth, (1-y2/mapHeight)));

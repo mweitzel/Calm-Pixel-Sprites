@@ -16,11 +16,7 @@
 	private var shouldForceLoop : boolean = false;
 
 	public function Start(){
-		attach();
-	}
-	
-	private function attach(){
-		
+
 	}
 	
 	public function Awake(){
@@ -80,7 +76,7 @@
 	}
 
 	private function animationFromDefault() : AnimationStruct {
-		var newAnimationStruct = CalmSpritesFactory.newAnimation(defaultFrame);//ScriptableObject.CreateInstance(AnimationStruct) as AnimationStruct;
+		var newAnimationStruct = CalmSpritesFactory.newAnimationStruct(defaultFrame);//ScriptableObject.CreateInstance(AnimationStruct) as AnimationStruct;
 //		var newFrame = new Frame(defaultFrame);
 //		newAnimationStruct.frames = [newFrame];
 		return newAnimationStruct;

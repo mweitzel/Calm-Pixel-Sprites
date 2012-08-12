@@ -1,10 +1,15 @@
 #pragma strict
 
+RequireComponent(MeshFilter);
+RequireComponent(MeshRenderer);
+
 var myAtlas : Atlas;
 var myFilter : MeshFilter;
 private var currentSprite : String = "";
 
 function Start () {
+
+	myFilter = GetComponent(MeshFilter);
 
     renderer.material = new Material (Shader.Find("Diffuse"));
     renderer.material.mainTexture = myAtlas.renderer.materials[0].mainTexture;
@@ -15,10 +20,11 @@ function Start () {
 }
 
 function Update () {
-	if(myFilter.mesh.vertices.length == 0){
-		myFilter.mesh = myAtlas.meshFilter.mesh;
-		updateSprite();
-	}
+//	if(myFilter.mesh.vertices.length == 0){
+//		Debug.Log("hi");
+//		myFilter.mesh = myAtlas.meshFilter.mesh;
+//		updateSprite();
+//	}
 }
 
 function setSprite(newSprite : String){
@@ -51,5 +57,6 @@ private function updateSprite(){
 
 	//how important is this?
     myFilter.mesh.RecalculateNormals();
+    myFilter.mesh.RecalculateBounds();
 	
 }

@@ -1,0 +1,16 @@
+water = 0 40 10 10
+grass = 0 20 10 10
+grass_water_0010 = 0 0 10 10
+grass_water_0001 = 10 0 10 10
+grass_water_1000 = 10 10 10 10
+grass_water_0100 = 0 10 10 10
+grass_water_1101 = 20 0 10 10
+grass_water_1110 = 30 0 10 10
+grass_water_0111 = 30 10 10 10
+grass_water_1011 = 20 10 10 10
+grass_water_1100 = 10 20 10 10
+grass_water_0011 = 20 20 10 10
+grass_water_0110 = 30 20 10 10
+grass_water_0101 = 10 30 10 10
+grass_water_1010 = 20 30 10 10
+grass_water_1001 = 30 30 10 10

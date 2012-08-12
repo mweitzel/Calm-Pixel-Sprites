@@ -9,7 +9,7 @@
 //}
 public static var looseEnds = new GameObject("_single animations from CalmSpritesFactory");
 
-public static function newAnimation(passedName : String) : AnimationStruct{
+public static function newAnimationStruct(passedName : String) : AnimationStruct {
 //	passedName = "" + passedName;
 	var newAnimation = new GameObject();
 	var animation : AnimationStruct = newAnimation.AddComponent(AnimationStruct);
@@ -18,4 +18,37 @@ public static function newAnimation(passedName : String) : AnimationStruct{
 	newAnimation.transform.parent = looseEnds.transform;
 	animation.frames = [new Frame(passedName)];
 	return animation;
+}
+
+public static function newSpriteAnimation(atlas : Atlas, name : String) : SpriteAnimation {
+	var spriteAnimation = newSpriteAnimation(atlas);
+	spriteAnimation.setSprite(name);
+	return spriteAnimation;
+}
+
+public static function newSpriteAnimation(atlas : Atlas, animation : AnimationStruct) : SpriteAnimation {
+	var spriteAnimation = newSpriteAnimation(atlas);
+	spriteAnimation.setSprite(animation);
+	return spriteAnimation;
+
+//	var spriteAnimation
+////	var stapToParentsInt
+////	var MeshFilter
+//
+//	var SingleSprite
+//		atlas
+
+}
+
+private static function newSpriteAnimation(atlas : Atlas) : SpriteAnimation {
+	var newSpriteAnimation = new GameObject("factory sprite animation");
+	var spriteAnimation = newSpriteAnimation.AddComponent(SpriteAnimation);
+	newSpriteAnimation.AddComponent(SnapToParentsInt);
+	newSpriteAnimation.AddComponent(MeshFilter);
+	newSpriteAnimation.AddComponent(MeshRenderer);
+	var singleSprite = newSpriteAnimation.AddComponent(SingleSprite);
+	singleSprite.myAtlas = atlas;
+	spriteAnimation.sprite = singleSprite;
+	
+	return spriteAnimation;
 }
