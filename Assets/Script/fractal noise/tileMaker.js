@@ -12,7 +12,7 @@ function Start () {
 function Update () {
 
 	
-//	Destroy(holder);
+	Destroy(holder);
 	holder = new GameObject();
 	makeSprites();
 	
@@ -66,6 +66,7 @@ function makeSpritesFor(i : float, j : float){
 //		makeSprite("water", Vector2(i + 0.5, j + 0.5));
 //	}
 //	else{
+		Debug.Log(i + " " + j);
 		makeSprite(getSprite(i, j, 4), Vector2(i - 0.25, j - 0.25));
 		makeSprite(getSprite(i, j, 3), Vector2(i + 0.25, j - 0.25));
 		makeSprite(getSprite(i, j, 2), Vector2(i + 0.25, j + 0.25));
@@ -75,78 +76,218 @@ function makeSpritesFor(i : float, j : float){
 }
 
 function getSprite(i : int, j : int, quadrant : int) : String {
-	var spot1 : Vector2;
-	var spot2 : Vector2;
-	var spot3 : Vector2;
-	var spot4 : Vector2;
-	
-	var thisIsWater = isWater(i, j);
-	
-	if(quadrant == 4){
-		spot4 = Vector2(i-1, j-1);
-		spot3 = Vector2(i, j-1);
-		spot2 = Vector2(i, j);
-		spot1 = Vector2(i-1, j);
-	}
-	else if(quadrant == 3){
-		spot4 = Vector2(i, j-1);
-		spot3 = Vector2(i+1, j-1);
-		spot2 = Vector2(i+1, j);
-		spot1 = Vector2(i, j);
-	}
-	else if(quadrant == 2){
-		spot4 = Vector2(i, j);
-		spot3 = Vector2(i+1, j+1);
-		spot2 = Vector2(i+1, j+1);
-		spot1 = Vector2(i, j+1);
-	}
-	else{
-		spot4 = Vector2(i-1, j);
-		spot3 = Vector2(i, j);
-		spot2 = Vector2(i, j+1);
-		spot1 = Vector2(i-1, j+1);
-	}
-	if(thisIsWater)
-		return "water";
-	
-	var spriteName = "grass_water_";
-	if(isWater(spot1.x, spot1.y))
-		spriteName += "0";
+	if(isWater(i, j))
+		return getWaterSprite(i, j, quadrant);
 	else
-		spriteName += "1";
-		
-	if(isWater(spot2.x, spot2.y))
-		spriteName += "0";
-	else
-		spriteName += "1";
-		
-	if(isWater(spot3.x, spot3.y))
-		spriteName += "0";
-	else
-		spriteName += "1";
-		
-	if(isWater(spot4.x, spot4.y))
-		spriteName += "0";
-	else
-		spriteName += "1";
-		
-		
-//	Debug.Log(spriteName)
-//	Debug.Log(spriteName + "  .. " + i + " " + j);
-	
-	if(spriteName == "grass_water_1111")
-		return "grass";
-		
-	if(spriteName == "grass_water_0000")
-		return "water";
-		
-//	Debug.Log(spriteName + "  .. " + i + " " + j);
-	return spriteName;
+		return getLandSprite(i, j, quadrant);
+}
+
+function getWaterSprite(i, j, quadrant) : String {
 	
 }
 
+function getLandSprite(i, j, quadrant) : String {
+	
+}
+
+function spot1(i : int, j : int, quadrant : int) : Vector2{
+	if(quadrant == 4){
+		return Vector2(i-1, j);
+	}
+	else if(quadrant == 3){
+		return Vector2(i, j);
+	}
+	else if(quadrant == 2){
+		return Vector2(i, j+1);
+	}
+	else{
+		return Vector2(i-1, j+1);
+	}
+
+}
+
+function spot2(i : int, j : int, quadrant : int) : Vector2{
+	if(quadrant == 4){
+		return Vector2(i, j);
+	}
+	else if(quadrant == 3){
+		return Vector2(i+1, j);
+	}
+	else if(quadrant == 2){
+		return Vector2(i+1, j+1);
+	}
+	else{
+		return Vector2(i, j+1);
+	}
+	
+}
+
+function spot3(i : int, j : int, quadrant : int) : Vector2{
+	if(quadrant == 4){
+		return Vector2(i, j-1);
+	}
+	else if(quadrant == 3){
+		return Vector2(i+1, j-1);
+	}
+	else if(quadrant == 2){
+		return Vector2(i+1, j);
+	}
+	else{
+		return Vector2(i, j);
+	}
+	
+}
+
+function spot4(i : int, j : int, quadrant : int) : Vector2{
+	if(quadrant == 4){
+		return Vector2(i-1, j-1);
+	}
+	else if(quadrant == 3){
+		return Vector2(i, j-1);
+	}
+	else if(quadrant == 2){
+		return Vector2(i, j);
+	}
+	else{
+		return Vector2(i-1, j);
+	}
+	
+}
+
+//function getSprite(i : int, j : int, quadrant : int) : String {
+//	var spot1 : Vector2;
+//	var spot2 : Vector2;
+//	var spot3 : Vector2;
+//	var spot4 : Vector2;
+//	
+//	var thisIsWater = isWater(i, j);
+//	
+//	if(quadrant == 4){
+//		spot4 = Vector2(i-1, j-1);
+//		spot3 = Vector2(i, j-1);
+//		spot2 = Vector2(i, j);
+//		spot1 = Vector2(i-1, j);
+//	}
+//	else if(quadrant == 3){
+//		spot4 = Vector2(i, j-1);
+//		spot3 = Vector2(i+1, j-1);
+//		spot2 = Vector2(i+1, j);
+//		spot1 = Vector2(i, j);
+//	}
+//	else if(quadrant == 2){
+//		spot4 = Vector2(i, j);
+//		spot3 = Vector2(i+1, j);
+//		spot2 = Vector2(i+1, j+1);
+//		spot1 = Vector2(i, j+1);
+//	}
+//	else{
+//		spot4 = Vector2(i-1, j);
+//		spot3 = Vector2(i, j);
+//		spot2 = Vector2(i, j+1);
+//		spot1 = Vector2(i-1, j+1);
+//	}
+//	
+//	var numberOfWetCorners = 0;
+//	if(isWater(spot1.x, spot1.y))
+//		numberOfWetCorners++;
+//	if(isWater(spot2.x, spot2.y))
+//		numberOfWetCorners++;
+//	if(isWater(spot3.x, spot3.y))
+//		numberOfWetCorners++;
+//	if(isWater(spot4.x, spot4.y))
+//		numberOfWetCorners++;
+//	
+//	if(!thisIsWater){// && (numberOfWetCorners != 1))
+//		
+////		if(numberOfWetCorners == 2){
+////			if((!isWater(spot4.x, spot4.y) && quadrant == 4)||
+////				(!isWater(spot3.x, spot3.y) && quadrant == 3)||
+////				(!isWater(spot2.x, spot2.y) && quadrant == 2)||
+////				(!isWater(spot1.x, spot1.y) && quadrant == 1))
+//		if(numberOfWetCorners == 3){
+////			if((isWater(spot4.x, spot4.y) && quadrant == 4)||
+////				(isWater(spot3.x, spot3.y) && quadrant == 3)||
+////				(isWater(spot2.x, spot2.y) && quadrant == 2)||
+////				(isWater(spot1.x, spot1.y) && quadrant == 1))
+////				{
+//////					return "water";
+//			if((isWater(spot4.x, spot4.y) && quadrant == 4)){
+//				return "grass_water_1110";
+//			}
+//			if((isWater(spot3.x, spot3.y) && quadrant == 3)){
+//				return "grass_water_1101";
+//			}
+//			if((isWater(spot2.x, spot2.y) && quadrant == 2)){
+//				return "grass_water_1011";
+//			}
+//			if((isWater(spot1.x, spot1.y) && quadrant == 1)){
+//				return "grass_water_0111";
+//			}
+////					return "water";
+////			}
+//			
+//		}
+//		else{
+//			return "grass";
+//		}
+////		}
+//
+//	}
+//	else{
+//		if(numberOfWetCorners == 3){
+//			if((!isWater(spot4.x, spot4.y) && quadrant == 4)||
+//				(!isWater(spot3.x, spot3.y) && quadrant == 3)||
+//				(!isWater(spot2.x, spot2.y) && quadrant == 2)||
+//				(!isWater(spot1.x, spot1.y) && quadrant == 1))
+//					return "water";
+//		}
+//		else if(numberOfWetCorners == 2){
+//			if(isWater(spot4.x, spot4.y) == isWater(spot2.x, spot2.y)){
+//				if(quadrant == 1 && isWater())
+//					
+//			}
+//		}
+//	}
+//	
+//	var spriteName = "grass_water_";
+//	if(isWater(spot1.x, spot1.y))
+//		spriteName += "0";
+//	else
+//		spriteName += "1";
+//		
+//	if(isWater(spot2.x, spot2.y))
+//		spriteName += "0";
+//	else
+//		spriteName += "1";
+//		
+//	if(isWater(spot3.x, spot3.y))
+//		spriteName += "0";
+//	else
+//		spriteName += "1";
+//		
+//	if(isWater(spot4.x, spot4.y))
+//		spriteName += "0";
+//	else
+//		spriteName += "1";
+//		
+//		
+////	Debug.Log(spriteName)
+////	Debug.Log(spriteName + "  .. " + i + " " + j);
+//	
+//	if(spriteName == "grass_water_1111")
+//		return "grass";
+//		
+//	if(spriteName == "grass_water_0000")
+//		return "water";
+//		
+////	Debug.Log(spriteName + "  .. " + i + " " + j);
+//	return spriteName;
+//	
+//}
+
 function makeSprite(name : String, vec : Vector2){
-	var obj = new GameObject(""+vec);
+//	var obj = new GameObject(""+vec);
+	var obj = new GameObject(""+isWater(Mathf.RoundToInt(vec.x), Mathf.RoundToInt(vec.y)));
 	var sprite = CalmSpritesFactory.newSpriteAnimation(atlas, name);
 	obj.transform.parent = holder.transform;
 	sprite.gameObject.transform.parent = obj.transform;

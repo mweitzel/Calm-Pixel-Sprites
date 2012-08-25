@@ -8,8 +8,8 @@ var myFilter : MeshFilter;
 private var currentSprite : String = "";
 
 function Start () {
-
-	myFilter = GetComponent(MeshFilter);
+	
+	selfSetFilter();
 
     renderer.material = new Material (Shader.Find("Diffuse"));
     renderer.material.mainTexture = myAtlas.renderer.materials[0].mainTexture;
@@ -17,6 +17,10 @@ function Start () {
 	GetComponent(MeshRenderer).material = myAtlas.renderer.materials[0];
 
 	updateSprite();
+}
+
+function selfSetFilter(){
+	myFilter = GetComponent(MeshFilter);
 }
 
 function Update () {

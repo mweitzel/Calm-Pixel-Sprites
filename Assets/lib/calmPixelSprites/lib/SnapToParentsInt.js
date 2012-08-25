@@ -14,8 +14,8 @@ function Update () {
 
 	if(ignoreZ)
 		transform.position = new Vector3(Mathf.RoundToInt(target.position.x), Mathf.RoundToInt(target.position.y), transform.position.z);
-//	else
-//		transform.position = new Vector3(Mathf.RoundToInt(target.position.x) , Mathf.RoundToInt(target.position.y), target.position.z);
+	else
+		transform.position = new Vector3(Mathf.RoundToInt(target.position.x) , Mathf.RoundToInt(target.position.y), target.position.z);
 
 
 //	if(ignoreZ)

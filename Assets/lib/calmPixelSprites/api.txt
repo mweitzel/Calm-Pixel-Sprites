@@ -18,3 +18,12 @@ spriteAnimation()
 //todo
 //	turn atlas into a map, abstractify.
 //	..maybe do this. but probably maybe not, too
+
+
+
+
+
+
+
+good seed values:
+7628211

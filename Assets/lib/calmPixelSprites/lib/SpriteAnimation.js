@@ -26,10 +26,19 @@
 		
 		if(playOnAwake)
 			play();
+			
 	}
 	
+	var updateThisShit = false;
 	public function Update(){
-		if(!shouldDisplay){
+		if(updateThisShit)
+			display();
+	}
+	
+	 function display() {
+		
+		
+			if(!shouldDisplay){
 			sprite.setSprite(AnimationStruct.nullSprite());
 		}
 		else if (shouldForceLoop){
@@ -38,7 +47,11 @@
 		else{
 			sprite.setSprite(AnimationStruct.frameAt(animationStruct, playSpeed * timeOfInterest()));
 		}
+	
+		
+		
 	}
+	
 
 	public function play(timeOffset : float){
 		playOffset = timeOffset;
